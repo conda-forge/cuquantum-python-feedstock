@@ -17,7 +17,9 @@ build:
     - CUDA_HOME  # [ppc64le or aarch64]
     - CUQUANTUM_ROOT=$PREFIX
     - CUTENSOR_ROOT=$PREFIX
+    - CUQUANTUM_IGNORE_SOLVER=1
   script:
+    - cd python
     - {{ PYTHON }} -m pip install . --no-deps -vv
 
 requirements:
