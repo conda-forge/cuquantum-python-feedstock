@@ -11,7 +11,7 @@ source:
 
 build:
   number: 3
-  skip: True  # [win or ppc64le or cuda_compiler_version != "11.2"]
+  skip: True  # [win or cuda_compiler_version != "11.2"]
   script_env:
     # for some reason /usr/local/cuda is not added to $PATH in ppc64le's docker image
     - CUDA_HOME  # [ppc64le or aarch64]
