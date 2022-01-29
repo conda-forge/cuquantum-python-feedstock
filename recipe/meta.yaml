@@ -27,7 +27,7 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - {{ compiler('cuda') }}
-    - sysroot_linux-64 2.17  # [linux]
+    - sysroot_linux-64 2.17  # [linux64]
   host:
     - python
     - pip
@@ -52,14 +52,10 @@ about:
   license: BSD-3-Clause
   license_url: https://docs.nvidia.com/cuda/cuquantum/license.html
   license_file: LICENSE
-  summary: "cuQuantum Python"
+  summary: "cuQuantum Python: Python APIs for NVIDIA cuQuantum SDK"
   description: |
-    Python APIs for NVIDIA cuQuantum SDK.
-
-    License Agreements:- The packages are governed by the NVIDIA cuQuantum-Python
-    Software License Agreement (EULA). By downloading and using the packages,
-    you accept the terms and conditions of the NVIDIA cuQuantum EULA -
-    https://docs.nvidia.com/cuda/cuquantum/license.html
+    NVIDIA cuQuantum Python provides Python bindings and high-level object-oriented
+    models for accessing the full functionalities of NVIDIA cuQuantum SDK from Python.
   doc_url: https://docs.nvidia.com/cuda/cuquantum/index.html
   dev_url: https://github.com/NVIDIA/cuQuantum
 
