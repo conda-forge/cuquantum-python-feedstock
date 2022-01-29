@@ -7,18 +7,14 @@ Package license: [BSD-3-Clause](https://docs.nvidia.com/cuda/cuquantum/license.h
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/cuquantum-python-feedstock/blob/master/LICENSE.txt)
 
-Summary: cuQuantum Python
+Summary: cuQuantum Python: Python APIs for NVIDIA cuQuantum SDK
 
 Development: https://github.com/NVIDIA/cuQuantum
 
 Documentation: https://docs.nvidia.com/cuda/cuquantum/index.html
 
-Python APIs for NVIDIA cuQuantum SDK.
-
-License Agreements:- The packages are governed by the NVIDIA cuQuantum-Python
-Software License Agreement (EULA). By downloading and using the packages,
-you accept the terms and conditions of the NVIDIA cuQuantum EULA -
-https://docs.nvidia.com/cuda/cuquantum/license.html
+NVIDIA cuQuantum Python provides Python bindings and high-level object-oriented
+models for accessing the full functionalities of NVIDIA cuQuantum SDK from Python.
 
 
 Current build status
@@ -197,7 +193,4 @@ Feedstock Maintainers
 =====================
 
 * [@leofang](https://github.com/leofang/)
-
-
-<!-- dummy commit to enable rerendering -->
 
