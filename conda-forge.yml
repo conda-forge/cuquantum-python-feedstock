@@ -8,3 +8,6 @@ provider:
   linux_ppc64le: default
 bot:
   check_solvable: true
+github:
+  branch_name: main
+  tooling_branch_name: main
