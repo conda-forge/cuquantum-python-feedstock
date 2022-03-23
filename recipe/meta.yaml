@@ -36,6 +36,7 @@ requirements:
     - pip
     - cython
     - cuquantum {{ version }}.*
+    - packaging
   run:
     - python
     - numpy >=1.17
