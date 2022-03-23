@@ -38,6 +38,7 @@ requirements:
     - numpy >=1.17
     - cupy >=9.5
     - cuquantum {{ version }}.*
+    - typing_extensions  # see NVIDIA/cuQuantum#3
   run_constrained:
     - pytorch >=1.10
 
