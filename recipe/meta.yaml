@@ -21,6 +21,9 @@ build:
   script:
     - cd python
     - {{ PYTHON }} -m pip install . --no-deps -vv
+  ignore_run_exports_from:
+    # let cuquantum handle the CUDA deps
+    - {{ compiler('cuda') }}
 
 requirements:
   build:
