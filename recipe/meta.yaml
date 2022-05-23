@@ -1,4 +1,4 @@
-{% set version = "22.03" %}
+{% set version = "22.05" %}
 {% set py_version = "0" %}
 
 package:
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/NVIDIA/cuQuantum/archive/refs/tags/v{{ version }}.{{ py_version }}.tar.gz
-  sha256: 042f9efbc01c35cdd78491dab6122c01f0bccc06548aaf1c2c38f82ceab56317
+  sha256: a589b153b8680bdca8e49e957bce7e171b84776e78beb93f1cb0eedc39094302
 
 build:
   number: 0
@@ -67,4 +67,5 @@ about:
 extra:
   recipe-maintainers:
     - leofang
+    - JeremyWangNVDA
     - mtjrider
