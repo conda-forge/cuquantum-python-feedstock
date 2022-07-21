@@ -1,12 +1,11 @@
-{% set version = "22.05" %}
-{% set py_version = "0" %}
+{% set version = "22.05.0" %}
 
 package:
   name: cuquantum-python
-  version: {{ version }}.{{ py_version }}
+  version: {{ version }}
 
 source:
-  url: https://github.com/NVIDIA/cuQuantum/archive/refs/tags/v{{ version }}.{{ py_version }}.tar.gz
+  url: https://github.com/NVIDIA/cuQuantum/archive/refs/tags/v{{ version }}.tar.gz
   sha256: a589b153b8680bdca8e49e957bce7e171b84776e78beb93f1cb0eedc39094302
 
 build:
