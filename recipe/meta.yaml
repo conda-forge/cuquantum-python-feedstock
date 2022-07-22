@@ -1,4 +1,4 @@
-{% set version = "22.05.0" %}
+{% set version = "22.07.0" %}
 
 package:
   name: cuquantum-python
@@ -6,14 +6,12 @@ package:
 
 source:
   url: https://github.com/NVIDIA/cuQuantum/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: a589b153b8680bdca8e49e957bce7e171b84776e78beb93f1cb0eedc39094302
+  sha256: 220ce5ef4bfd0ecd7a260f8b456af4b2c85a9d9ddeffb98d8adcb62f5dec6207
 
 build:
   number: 0
-  skip: True  # [win or ppc64le or cuda_compiler_version != "11.2"]
+  skip: True  # [win or cuda_compiler_version != "11.2"]
   script_env:
-    # for some reason /usr/local/cuda is not added to $PATH in ppc64le's docker image
-    - CUDA_HOME  # [ppc64le or aarch64]
     - CUQUANTUM_ROOT=$PREFIX
     - CUTENSOR_ROOT=$PREFIX
     - CUQUANTUM_IGNORE_SOLVER=1
@@ -34,16 +32,16 @@ requirements:
     - python
     - pip
     - cython
-    - cuquantum {{ version }}.*
+    - cuquantum {{ version }}
     - packaging
   run:
     - python
-    - numpy >=1.17
+    - numpy >=1.19
     - cupy >=9.5
-    - cuquantum {{ version }}.*
-    - typing_extensions  # see NVIDIA/cuQuantum#3
+    # cuquantum has run_exports, so we don't need to pin here
   run_constrained:
     - pytorch >=1.10
+    # we don't have to pin Qiskit or Cirq here because their versions are fairly recent on conda-forge
 
 test:
   imports:
