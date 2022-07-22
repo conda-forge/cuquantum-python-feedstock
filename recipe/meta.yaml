@@ -10,7 +10,7 @@ source:
 
 build:
   number: 0
-  skip: True  # [win or cuda_compiler_version != "11.2"]
+  skip: True  # [win or cuda_compiler_version != "11.2" or py < 38]
   script_env:
     - CUQUANTUM_ROOT=$PREFIX
     - CUTENSOR_ROOT=$PREFIX
