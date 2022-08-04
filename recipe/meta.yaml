@@ -1,4 +1,4 @@
-{% set version = "22.07.0" %}
+{% set version = "22.07.1" %}
 
 package:
   name: cuquantum-python
@@ -6,11 +6,11 @@ package:
 
 source:
   url: https://github.com/NVIDIA/cuQuantum/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: 220ce5ef4bfd0ecd7a260f8b456af4b2c85a9d9ddeffb98d8adcb62f5dec6207
+  sha256: 0e33a518bd0ed902f0218e5eafbacb5bf1fcf7949bc923308658e35d0dc9f1fe
 
 build:
   number: 0
-  skip: True  # [win or cuda_compiler_version != "11.2" or py < 38]
+  skip: true  # [win or cuda_compiler_version != "11.2" or py < 38]
   script_env:
     - CUQUANTUM_ROOT=$PREFIX
     - CUTENSOR_ROOT=$PREFIX
@@ -54,7 +54,7 @@ about:
   license: BSD-3-Clause
   license_url: https://docs.nvidia.com/cuda/cuquantum/license.html#nvidia-cuquantum-python
   license_file: LICENSE
-  summary: "cuQuantum Python: Python APIs for NVIDIA cuQuantum SDK"
+  summary: 'cuQuantum Python: Python APIs for NVIDIA cuQuantum SDK'
   description: |
     NVIDIA cuQuantum Python provides Python bindings and high-level object-oriented
     models for accessing the full functionalities of NVIDIA cuQuantum SDK from Python.
