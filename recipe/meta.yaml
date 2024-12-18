@@ -9,7 +9,7 @@ source:
   sha256: 0e33a518bd0ed902f0218e5eafbacb5bf1fcf7949bc923308658e35d0dc9f1fe
 
 build:
-  number: 0
+  number: 1
   skip: True  # [win or cuda_compiler_version != "11.2" or py < 38]
   script_env:
     - CUQUANTUM_ROOT=$PREFIX
