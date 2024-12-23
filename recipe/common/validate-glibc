@@ -1,0 +1,73 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC1009
+
+{
+
+  declare -gx validate_glibc_root
+  validate_glibc_root="$(
+    cd "$(dirname "${BASH_SOURCE[0]}")" &&
+    pwd -L
+  )"
+  if [[ -f "${validate_glibc_root}/detect-glibc" ]] ; then
+    source "${validate_glibc_root}/detect-glibc"
+  else
+    echo "error: detect-glibc functions are not available"
+    exit 1
+  fi
+
+  RECIPE_GLIBC="$(
+        glibc-detect env c_stdlib_version
+      )"
+      echo "Recipe-glibc: ${RECIPE_GLIBC}"
+  if [[ -z "${RECIPE_GLIBC}" ]] ; then
+    echo "error: recipe glibc not set"
+    exit 1
+  fi
+
+  SYSTEM_GLIBC="$(
+        glibc-detect system
+      )"
+      echo "System-glibc: ${SYSTEM_GLIBC}"  
+
+  declare -agx LIBRARIES
+  if [[ -z "${LIBRARIES[*]}" ]] ; then
+    LIBRARIES=("${@}")
+  fi
+  declare -gx LIBRARY
+  for LIBRARY in "${LIBRARIES[@]}" ; do
+    if [[ -f "${LIBRARY}" ]] ; then
+      declare -gx LIBRARY_GLIBC RECIPE_GLIBC SYSTEM_GLIBC
+      LIBRARY_GLIBC="$(
+        glibc-detect required-by "${LIBRARY}"
+      )"
+      echo "Library-glibc: ${LIBRARY_GLIBC}"
+      glibc-check compatible "${SYSTEM_GLIBC}" "${RECIPE_GLIBC}" || {
+        echo "warning: the glibc version required by the recipe"
+        echo "         is not compatible with the system glibc version"
+        echo "         recipe glibc version: ${RECIPE_GLIBC}"
+        echo "         system glibc version: ${SYSTEM_GLIBC}"
+        echo "system_glibc (provider) < recipe_glibc (detected)"
+        echo "${SYSTEM_GLIBC} < ${RECIPE_GLIBC}"
+        exit 0
+      }
+      glibc-check compatible "${SYSTEM_GLIBC}" "${LIBRARY_GLIBC}" || {
+        echo "warning: the glibc version required by the recipe"
+        echo "         is not compatible with the system glibc version"
+        echo "         library glibc version: ${LIBRARY_GLIBC}"
+        echo "         system glibc version: ${SYSTEM_GLIBC}"
+        echo "system_glibc (provider) < library_glibc (detected)"
+        echo "${SYSTEM_GLIBC} < ${LIBRARY_GLIBC}"
+        exit 0
+      }
+      glibc-check compatible "${RECIPE_GLIBC}" "${LIBRARY_GLIBC}" || {
+        echo "warning: the glibc version required by the recipe"
+        echo "         is not compatible with the system glibc version"
+        echo "         library glibc version: ${LIBRARY_GLIBC}"
+        echo "         recipe glibc version: ${RECIPE_GLIBC}"
+        echo "recipe_glibc (provider) < library_glibc (detected)"
+        echo "${LIBRARY_GLIBC} < ${RECIPE_GLIBC}"
+        exit 0
+      }
+    fi
+  done
+}
