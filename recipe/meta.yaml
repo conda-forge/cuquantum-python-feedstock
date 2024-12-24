@@ -1,15 +1,16 @@
 {% set package="cuquantum-python" %}
 # Make sure the component versions are consistent with the SDK version!
-{% set sdk_version_string = "24.08.0.5" %}
+{% set sdk_version_string = "24.11.0.21" %}
 {% set sdk_version = sdk_version_string.split(".") %}
 {% set sdk_year  = sdk_version[0] | int %}
 {% set sdk_month = sdk_version[1] | int %}
 {% set sdk_patch = sdk_version[2] | int %}
 {% set sdk_build = sdk_version[3] | int %}
-{% set build_num = 6 %}
+{% set build_num = 0 %}
 
-{% set cusv_version = "1.6.0" %}
-{% set cutn_version = "2.5.0" %}
+{% set cusv_version = "1.7.0" %}
+{% set cutn_version = "2.6.0" %}
+{% set cudm_version = "0.0.5" %}
 
 {% set github = "https://github.com/nvidia/cuquantum" %}
 {% set github = "%s/archive/refs/tags/v%s.tar.gz" % (github, ".".join(sdk_version[:3])) %}
@@ -19,13 +20,14 @@ package:
   version: {{ ".".join(sdk_version[:3]) }}
 
 source:
-  - url: {{ github }}  # [linux64 or aarch64 or ppc64le]
+  - url: {{ github }}  # [linux64 or aarch64]
     sha256: 6e4a5ad168e8aaa422f338c2a273242d3c9aa22be081a4065f85d75b6eecda7a  # [linux64 or aarch64]
 
 build:
   number: {{ build_num }}
   skip: true  # [not ( (cuda_compiler_version or "").startswith("11") or (cuda_compiler_version or "").startswith("12") )]
   skip: true  # [py<310]
+  skip: treu  # [not (linux64 or aarch64)]
   skip: true  # [win or osx]
   script: "${RECIPE_DIR}/cuquantum-python/cuquantum-python-install"
   ignore_run_exports_from:
@@ -46,7 +48,7 @@ requirements:
     - cython <3
     - custatevec  ={{ cusv_version }}
     - cutensornet ={{ cutn_version }}    
-    #- cudensitymat ={{cudm_version}}
+    - cudensitymat ={{cudm_version}}
     - packaging
     # setuptools requirement may be new
     - setuptools
@@ -57,6 +59,7 @@ requirements:
     - cuda-version >=11.0.*,<13.a0
     - {{ pin_compatible('custatevec', max_pin='x') }}
     - {{ pin_compatible('cutensornet', max_pin='x') }}
+    - {{ pin_compatible('cudensitymat', max_pin='x') }}
   run_constrained:
     - pytorch >=1.10
     - mpi4py >=3.1.0
