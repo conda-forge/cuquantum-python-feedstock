@@ -1,69 +1,90 @@
-{% set version = "22.07.1" %}
+{% set package="cuquantum-python" %}
+# Make sure the component versions are consistent with the SDK version!
+{% set sdk_version_string = "24.08.0.5" %}
+{% set sdk_version = sdk_version_string.split(".") %}
+{% set sdk_year  = sdk_version[0] | int %}
+{% set sdk_month = sdk_version[1] | int %}
+{% set sdk_patch = sdk_version[2] | int %}
+{% set sdk_build = sdk_version[3] | int %}
+{% set build_num = 6 %}
+
+{% set cusv_version = "1.6.0" %}
+{% set cutn_version = "2.5.0" %}
+
+{% set github = "https://github.com/nvidia/cuquantum" %}
+{% set github = "%s/archive/refs/tags/v%s.tar.gz" % (github, ".".join(sdk_version[:3])) %}
 
 package:
   name: cuquantum-python
-  version: {{ version }}
+  version: {{ ".".join(sdk_version[:3]) }}
 
 source:
-  url: https://github.com/NVIDIA/cuQuantum/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: 0e33a518bd0ed902f0218e5eafbacb5bf1fcf7949bc923308658e35d0dc9f1fe
+  - url: {{ github }}  # [linux64 or aarch64 or ppc64le]
+    sha256: 6e4a5ad168e8aaa422f338c2a273242d3c9aa22be081a4065f85d75b6eecda7a  # [linux64 or aarch64]
 
 build:
-  number: 0
-  skip: True  # [win or cuda_compiler_version != "11.2" or py < 38]
-  script_env:
-    - CUQUANTUM_ROOT=$PREFIX
-    - CUTENSOR_ROOT=$PREFIX
-    - CUQUANTUM_IGNORE_SOLVER=1
-  script:
-    - cd python
-    - {{ PYTHON }} -m pip install . --no-deps -vv
+  number: {{ build_num }}
+  skip: true  # [not ( (cuda_compiler_version or "").startswith("11") or (cuda_compiler_version or "").startswith("12") )]
+  skip: true  # [py<310]
+  skip: true  # [win or osx]
+  script: "${RECIPE_DIR}/cuquantum-python/cuquantum-python-install"
   ignore_run_exports_from:
-    # let cuquantum handle the CUDA deps
     - {{ compiler('cuda') }}
 
 requirements:
   build:
+    - {{ stdlib('c') }}
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - {{ compiler('cuda') }}
-    - sysroot_linux-64 2.17  # [linux64]
+    - cross-python_{{ target_platform }}  # [build_platform != target_platform]
+    - python >=3.10                       # [build_platform != target_platform]
+    - cython <3                           # [build_platform != target_platform]
   host:
-    - python
+    - python >=3.10
     - pip
-    - cython
-    - cuquantum {{ version }}
+    - cython <3
+    - custatevec  ={{ cusv_version }}
+    - cutensornet ={{ cutn_version }}    
+    #- cudensitymat ={{cudm_version}}
     - packaging
+    # setuptools requirement may be new
+    - setuptools
   run:
-    - python
-    - numpy >=1.19
-    - cupy >=9.5
-    # cuquantum has run_exports, so we don't need to pin here
+    - python >=3.10
+    - numpy  >=1.21
+    - cupy   >=13.0
+    - cuda-version >=11.0.*,<13.a0
+    - {{ pin_compatible('custatevec', max_pin='x') }}
+    - {{ pin_compatible('cutensornet', max_pin='x') }}
   run_constrained:
     - pytorch >=1.10
+    - mpi4py >=3.1.0
     # we don't have to pin Qiskit or Cirq here because their versions are fairly recent on conda-forge
 
 test:
-  imports:
-    - cuquantum
-    - cuquantum.custatevec
-    - cuquantum.cutensornet
+  requires:
+    - cuda-driver-dev  # [linux and (cuda_compiler_version or "").startswith("12")]
+  files:
+    - ./common/*
+    - ./cuquantum-python/*
+  commands:
+    - ./cuquantum-python/cuquantum-python-tests
 
 about:
   home: https://developer.nvidia.com/cuquantum-sdk
   license: BSD-3-Clause
-  license_url: https://docs.nvidia.com/cuda/cuquantum/license.html#nvidia-cuquantum-python
+  license_url: https://docs.nvidia.com/cuda/cuquantum/latest/license.html#nvidia-cuquantum-python
   license_file: LICENSE
   summary: "cuQuantum Python: Python APIs for NVIDIA cuQuantum SDK"
   description: |
     NVIDIA cuQuantum Python provides Python bindings and high-level object-oriented
     models for accessing the full functionalities of NVIDIA cuQuantum SDK from Python.
-  doc_url: https://docs.nvidia.com/cuda/cuquantum/python/index.html
+  doc_url: https://docs.nvidia.com/cuda/cuquantum/latest/python/
   dev_url: https://github.com/NVIDIA/cuQuantum
 
 extra:
   recipe-maintainers:
-    - conda-forge/cuquantum
     - leofang
     - JeremyWangNVDA
     - mtjrider
