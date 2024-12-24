@@ -1,0 +1,81 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC1090
+# shellcheck disable=SC1091
+set -ex
+
+declare -gx VALIDATE_GLIBC="./common/validate-glibc"
+if ! [[ -f "${VALIDATE_GLIBC}" ]] ; then
+  echo "error: validate-glibc is not available"
+  exit 1
+fi
+
+declare -gx FILES_LIB="./common/handle-files"
+if ! [[ -f "${FILES_LIB}" ]] ; then
+  echo "error: files-lib is not available"
+  exit 1
+else
+  source "${FILES_LIB}"
+fi
+
+declare -agx filepaths=(
+  "${PREFIX}/include/cudensitymat.h"
+  "${PREFIX}/include/cutensornet.h"
+  "${PREFIX}/include/cutensornet/types.h"
+  "${PREFIX}/include/cutensornet/typesDistributed.h"
+  "${PREFIX}/include/custatevec.h"
+  "${PREFIX}/lib/libcudensitymat.so"
+  "${PREFIX}/lib/libcutensornet.so"
+  "${PREFIX}/lib/libcustatevec.so"
+)
+
+if ! files exist "${filepaths[@]}" ; then
+  echo "error: cuquantum files are not available"
+  exit 1
+fi
+
+declare -agx LIBRARIES=(
+  "${PREFIX}/lib/libcudensitymat.so"
+  "${PREFIX}/lib/libcutensornet.so"
+  "${PREFIX}/lib/libcustatevec.so"
+)
+
+declare -agx supported_platforms
+supported_platforms=(
+  "linux-64"
+  "linux-aarch64"
+)
+
+declare -Agx cuda_stub_library
+cuda_stub_library=(
+  ["linux-64"]="${PREFIX}/targets/x86_64-linux/lib/stubs/libcuda.so"
+  ["linux-aarch64"]="${PREFIX}/targets/sbsa-linux/lib/stubs/libcuda.so"
+)
+
+declare -gx CUDA_STUB_LIBRARY
+declare platform ; for platform in "${supported_platforms[@]}" ; do
+  if [[ "${target_platform}" == "${platform}" ]] && ["${cuda_compiler_version}" != "11.8"] ; then
+    CUDA_STUB_LIBRARY="${cuda_stub_library[${platform}]}"
+  fi
+done
+
+
+LD_PRELOAD="${CUDA_STUB_LIBRARY}" python -c "import cuquantum"
+LD_PRELOAD="${CUDA_STUB_LIBRARY}" python -c "import cuquantum.custatevec"
+LD_PRELOAD="${CUDA_STUB_LIBRARY}" python -c "import cuquantum.cutensornet"
+LD_PRELOAD="${CUDA_STUB_LIBRARY}" python -c "import cuquantum.densitymat"
+
+echo "CuQuantum python and submodules are importable."
+
+source "${VALIDATE_GLIBC}" "${LIBRARIES[@]}"
+
+LD_PRELOAD="$CUDA_STUB_LIBRARY" python -m cuquantum --includes --libs --target custatevec || exit 1
+
+echo "CuQuantum python custatevec module is functional"
+
+LD_PRELOAD="$CUDA_STUB_LIBRARY" python -m cuquantum --includes --libs --target cutensornet || exit 1
+
+echo "CuQuantum python cutensornet module is functional"
+
+LD_PRELOAD="$CUDA_STUB_LIBRARY" python -m cuquantum --includes --libs --target cudensitymat || exit 1
+
+echo "CuQuantum python cudensitymat module is functional"

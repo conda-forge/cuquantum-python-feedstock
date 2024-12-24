@@ -1,17 +1,17 @@
-About cuquantum-python
-======================
+About cuquantum-python-feedstock
+================================
+
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/cuquantum-python-feedstock/blob/main/LICENSE.txt)
 
 Home: https://developer.nvidia.com/cuquantum-sdk
 
-Package license: [BSD-3-Clause](https://docs.nvidia.com/cuda/cuquantum/license.html#nvidia-cuquantum-python)
-
-Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/cuquantum-python-feedstock/blob/main/LICENSE.txt)
+Package license: [BSD-3-Clause](https://docs.nvidia.com/cuda/cuquantum/latest/license.html#nvidia-cuquantum-python)
 
 Summary: cuQuantum Python: Python APIs for NVIDIA cuQuantum SDK
 
 Development: https://github.com/NVIDIA/cuQuantum
 
-Documentation: https://docs.nvidia.com/cuda/cuquantum/python/index.html
+Documentation: https://docs.nvidia.com/cuda/cuquantum/latest/python/
 
 NVIDIA cuQuantum Python provides Python bindings and high-level object-oriented
 models for accessing the full functionalities of NVIDIA cuQuantum SDK from Python.
@@ -21,14 +21,7 @@ Current build status
 ====================
 
 
-<table><tr>
-    <td>Travis</td>
-    <td>
-      <a href="https://app.travis-ci.com/conda-forge/cuquantum-python-feedstock">
-        <img alt="linux" src="https://img.shields.io/travis/com/conda-forge/cuquantum-python-feedstock/main.svg?label=Linux">
-      </a>
-    </td>
-  </tr>
+<table>
     
   <tr>
     <td>Azure</td>
@@ -42,66 +35,87 @@ Current build status
         <table>
           <thead><tr><th>Variant</th><th>Status</th></tr></thead>
           <tbody><tr>
-              <td>linux_64_c_compiler_version10cuda_compiler_version11.2cxx_compiler_version10python3.10.____cpython</td>
+              <td>linux_64_c_compiler_version11cuda_compilernvcccuda_compiler_version11.8cxx_compiler_version11python3.10.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14820&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuquantum-python-feedstock?branchName=main&jobName=linux&configuration=linux_64_c_compiler_version10cuda_compiler_version11.2cxx_compiler_version10python3.10.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuquantum-python-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_c_compiler_version11cuda_compilernvcccuda_compiler_version11.8cxx_compiler_version11python3.10.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_64_c_compiler_version10cuda_compiler_version11.2cxx_compiler_version10python3.8.____cpython</td>
+              <td>linux_64_c_compiler_version11cuda_compilernvcccuda_compiler_version11.8cxx_compiler_version11python3.11.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14820&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuquantum-python-feedstock?branchName=main&jobName=linux&configuration=linux_64_c_compiler_version10cuda_compiler_version11.2cxx_compiler_version10python3.8.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuquantum-python-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_c_compiler_version11cuda_compilernvcccuda_compiler_version11.8cxx_compiler_version11python3.11.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_64_c_compiler_version10cuda_compiler_version11.2cxx_compiler_version10python3.9.____cpython</td>
+              <td>linux_64_c_compiler_version11cuda_compilernvcccuda_compiler_version11.8cxx_compiler_version11python3.12.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14820&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuquantum-python-feedstock?branchName=main&jobName=linux&configuration=linux_64_c_compiler_version10cuda_compiler_version11.2cxx_compiler_version10python3.9.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuquantum-python-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_c_compiler_version11cuda_compilernvcccuda_compiler_version11.8cxx_compiler_version11python3.12.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_aarch64_cuda_compiler_version11.2python3.10.____cpython</td>
+              <td>linux_64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13python3.10.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14820&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuquantum-python-feedstock?branchName=main&jobName=linux&configuration=linux_aarch64_cuda_compiler_version11.2python3.10.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuquantum-python-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13python3.10.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_aarch64_cuda_compiler_version11.2python3.8.____cpython</td>
+              <td>linux_64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13python3.11.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14820&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuquantum-python-feedstock?branchName=main&jobName=linux&configuration=linux_aarch64_cuda_compiler_version11.2python3.8.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuquantum-python-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13python3.11.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_aarch64_cuda_compiler_version11.2python3.9.____cpython</td>
+              <td>linux_64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13python3.12.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14820&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuquantum-python-feedstock?branchName=main&jobName=linux&configuration=linux_aarch64_cuda_compiler_version11.2python3.9.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuquantum-python-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13python3.12.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_ppc64le_cuda_compiler_version11.2python3.10.____cpython</td>
+              <td>linux_aarch64_c_compiler_version11cuda_compilernvcccuda_compiler_version11.8cxx_compiler_version11python3.10.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14820&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuquantum-python-feedstock?branchName=main&jobName=linux&configuration=linux_ppc64le_cuda_compiler_version11.2python3.10.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuquantum-python-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_c_compiler_version11cuda_compilernvcccuda_compiler_version11.8cxx_compiler_version11python3.10.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_ppc64le_cuda_compiler_version11.2python3.8.____cpython</td>
+              <td>linux_aarch64_c_compiler_version11cuda_compilernvcccuda_compiler_version11.8cxx_compiler_version11python3.11.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14820&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuquantum-python-feedstock?branchName=main&jobName=linux&configuration=linux_ppc64le_cuda_compiler_version11.2python3.8.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuquantum-python-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_c_compiler_version11cuda_compilernvcccuda_compiler_version11.8cxx_compiler_version11python3.11.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_ppc64le_cuda_compiler_version11.2python3.9.____cpython</td>
+              <td>linux_aarch64_c_compiler_version11cuda_compilernvcccuda_compiler_version11.8cxx_compiler_version11python3.12.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14820&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuquantum-python-feedstock?branchName=main&jobName=linux&configuration=linux_ppc64le_cuda_compiler_version11.2python3.9.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuquantum-python-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_c_compiler_version11cuda_compilernvcccuda_compiler_version11.8cxx_compiler_version11python3.12.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_aarch64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13python3.10.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14820&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuquantum-python-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13python3.10.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_aarch64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13python3.11.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14820&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuquantum-python-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13python3.11.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_aarch64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13python3.12.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14820&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuquantum-python-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13python3.12.____cpython" alt="variant">
                 </a>
               </td>
             </tr>
@@ -185,7 +199,7 @@ available continuous integration services. Thanks to the awesome service provide
 [CircleCI](https://circleci.com/), [AppVeyor](https://www.appveyor.com/),
 [Drone](https://cloud.drone.io/welcome), and [TravisCI](https://travis-ci.com/)
 it is possible to build and upload installable packages to the
-[conda-forge](https://anaconda.org/conda-forge) [Anaconda-Cloud](https://anaconda.org/)
+[conda-forge](https://anaconda.org/conda-forge) [anaconda.org](https://anaconda.org/)
 channel for Linux, Windows and OSX respectively.
 
 To manage the continuous integration and simplify feedstock maintenance

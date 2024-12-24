@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+
+function -logging- () {(
+  local message=(
+    "[ ${FUNCNAME[1]} ]"
+    "${*}"
+  )
+  printf "%s\n" "${message[*]}" >&2
+)}

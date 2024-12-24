@@ -1,0 +1,95 @@
+#!/usr/bin/env bash
+
+
+declare -gx common_dir
+common_dir="$(
+  cd "$(dirname "${BASH_SOURCE[0]}")" &&
+  pwd -L
+)"
+source "${common_dir}/-logging-"
+
+function files {(
+
+  local mode="${1}" ; shift
+  case "${mode}" in
+    "exist" )
+      files.exist "${@}"
+    ;;
+    "list")
+      files.list "${@}"
+    ;;
+    "move")
+      files.move "${@}"
+    ;;
+  esac
+)}
+
+function file.exists () {(
+
+  local filepath
+  if [[ -z "${filepath}" ]] ; then
+    filepath="${1}" ; shift
+  fi
+  -logging- "filepath=${filepath}"
+  if [[ -e "${filepath}" ]] ; then
+    return 0
+  else
+    return 1
+  fi
+)}
+
+function files.exist () {(
+
+  local filepaths=("${@}")
+  local missing="0"
+  local filepath
+  for filepath in "${filepaths[@]}" ; do
+    if ! file.exists "${filepath}" ; then
+      echo "error: ${filepath} does not exist"
+      (( missing++ ))
+    fi
+  done
+  if (( missing > 0 )) ; then
+    return 1
+  else
+    return 0
+  fi
+)}
+
+function files.list () {(
+
+  local directory
+  if [[ -z "${directory}" ]] ; then
+    directory="${1}" ; shift
+  fi
+  local namelike
+  if [[ -z "${namelike}" ]] ; then
+    namelike="${1}" ; shift
+  fi
+  -logging- "directory=${directory}" "namelike=${namelike}"
+  local filelike ; while read -r filelike ; do
+    echo "${filelike}"
+  done < <(find -L "${directory}" -name "${namelike}" -type f -print)
+)}
+
+function files.move () {(
+
+  local from
+  if [[ -z "${from}" ]] ; then
+    from="${1}" ; shift
+  fi
+  local named
+  if [[ -z "${named}" ]] ; then
+    named="${1}" ; shift
+  fi  
+  local dest
+  if [[ -z "${dest}" ]] ; then
+    dest="${1}" ; shift
+  fi
+  mkdir -p "${dest}"
+  -logging- "from=${from}" "named=${named}" "dest=${dest}"
+  local filelike ; while read -r filelike ; do
+    echo "${filelike} → ${dest}"
+    mv "${filelike}" "${dest}"
+  done < <(directory="${from}" namelike="${named}" files.list "${@}")
+)}
