@@ -25,9 +25,8 @@ source:
 
 build:
   number: {{ build_num }}
-  skip: true  # [not ( (cuda_compiler_version or "").startswith("11") or (cuda_compiler_version or "").startswith("12") )]
+  skip: true  # [cuda_compiler_version in (None, "None")]
   skip: true  # [py<310]
-  skip: treu  # [not (linux64 or aarch64)]
   skip: true  # [win or osx]
   script: "${RECIPE_DIR}/cuquantum-python/cuquantum-python-install"
   ignore_run_exports_from:

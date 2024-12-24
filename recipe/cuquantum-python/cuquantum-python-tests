@@ -18,12 +18,12 @@ else
 fi
 
 declare -agx filepaths=(
-  #"${PREFIX}/include/cudensitymat.h"
+  "${PREFIX}/include/cudensitymat.h"
   "${PREFIX}/include/cutensornet.h"
   "${PREFIX}/include/cutensornet/types.h"
   "${PREFIX}/include/cutensornet/typesDistributed.h"
   "${PREFIX}/include/custatevec.h"
-  #"${PREFIX}/lib/libcudensitymat.so"
+  "${PREFIX}/lib/libcudensitymat.so"
   "${PREFIX}/lib/libcutensornet.so"
   "${PREFIX}/lib/libcustatevec.so"
 )
@@ -34,7 +34,7 @@ if ! files exist "${filepaths[@]}" ; then
 fi
 
 declare -agx LIBRARIES=(
-  #"${PREFIX}/lib/libcudensitymat.so"
+  "${PREFIX}/lib/libcudensitymat.so"
   "${PREFIX}/lib/libcutensornet.so"
   "${PREFIX}/lib/libcustatevec.so"
 )
@@ -43,14 +43,12 @@ declare -agx supported_platforms
 supported_platforms=(
   "linux-64"
   "linux-aarch64"
-  "linux-ppc64le"
 )
 
 declare -Agx cuda_stub_library
 cuda_stub_library=(
   ["linux-64"]="${PREFIX}/targets/x86_64-linux/lib/stubs/libcuda.so"
   ["linux-aarch64"]="${PREFIX}/targets/sbsa-linux/lib/stubs/libcuda.so"
-  ["linux-ppc64le"]="${BUILD_PREFIX}/targets/ppc64le-linux/"
 )
 
 declare -gx CUDA_STUB_LIBRARY
@@ -64,7 +62,7 @@ done
 LD_PRELOAD="${CUDA_STUB_LIBRARY}" python -c "import cuquantum"
 LD_PRELOAD="${CUDA_STUB_LIBRARY}" python -c "import cuquantum.custatevec"
 LD_PRELOAD="${CUDA_STUB_LIBRARY}" python -c "import cuquantum.cutensornet"
-#LD_PRELOAD="${CUDA_STUB_LIBRARY}" python -c "import cuquantum.densitymat"
+LD_PRELOAD="${CUDA_STUB_LIBRARY}" python -c "import cuquantum.densitymat"
 
 echo "CuQuantum python and submodules are importable."
 
@@ -78,6 +76,6 @@ LD_PRELOAD="$CUDA_STUB_LIBRARY" python -m cuquantum --includes --libs --target c
 
 echo "CuQuantum python cutensornet module is functional"
 
-#LD_PRELOAD="$CUDA_STUB_LIBRARY" python -m cuquantum --includes --libs --target cudensitymat || exit 1
+LD_PRELOAD="$CUDA_STUB_LIBRARY" python -m cuquantum --includes --libs --target cudensitymat || exit 1
 
-#echo "CuQuantum python cudensitymat module is functional"
+echo "CuQuantum python cudensitymat module is functional"
