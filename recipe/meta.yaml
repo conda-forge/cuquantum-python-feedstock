@@ -1,4 +1,5 @@
 {% set package="cuquantum-python" %}
+# Make sure the component versions are consistent with the SDK version!
 {% set sdk_version_string = "24.08.0.5" %}
 {% set sdk_version = sdk_version_string.split(".") %}
 {% set sdk_year  = sdk_version[0] | int %}
